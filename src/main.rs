@@ -29,9 +29,12 @@ fn main() {
     input! { v: [f32; 4] }
     let calc_funcs: [fn(f32, f32) -> (f32, String, bool); 6] = [add, sub, rsub, mul, div, rdiv];
     // ((a o1 b) o2 c) 03 d
+    // 4P2
     for perm in v.iter().permutations(2) {
         let mut arr = perm;
-        let mut tmp = v.iter().filter(|&el| el != arr[0] && el != arr[1]).collect_vec();
+        let mut tmp = v.iter().collect_vec().clone();
+        tmp.remove(tmp.iter().position(|&p| p == arr[0]).unwrap());
+        tmp.remove(tmp.iter().position(|&p| p == arr[1]).unwrap());
         arr.append(&mut tmp);
 
         for (fn_1, fn_2, fn_3) in iproduct!(calc_funcs.iter(), calc_funcs.iter(), calc_funcs.iter()) {
