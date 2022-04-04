@@ -32,7 +32,7 @@ fn main() {
     // 4P2
     for perm in v.iter().permutations(2) {
         let mut arr = perm;
-        let mut tmp = v.iter().collect_vec().clone();
+        let mut tmp = v.iter().collect_vec();
         tmp.remove(tmp.iter().position(|&p| p == arr[0]).unwrap());
         tmp.remove(tmp.iter().position(|&p| p == arr[1]).unwrap());
         arr.append(&mut tmp);
